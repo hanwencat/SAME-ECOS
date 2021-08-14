@@ -415,8 +415,9 @@ def gaussian_embedding_log_scale(peak, T2_min, T2_max, t2_basis, sigma):
 
 def produce_training_data(decay_lib,
                           realizations = 10000,
+                          SNR = None,
                           SNR_boundary_low = 50,
-                          SNR_boundary_high = 800,
+                          SNR_boundary_high = 500,
                           echo_3 = 30,
                           echo_last = 320,
                           echo_train_num = 32,
@@ -425,15 +426,17 @@ def produce_training_data(decay_lib,
                           peak_width = 1,
                           T2_min_universal = None,
                           T2_max_universal = None,
-                          exclude_M_max = False):
+                          exclude_M_max = True, 
+                          N_weights = 0.2):
     """
     Produce training data via SAME-ECOS simulation pipeline (use a single cpu core).
 
     Args:
         decay_lib (array): the decay library
         realizations (int, optional): the number of simulation realizations. Defaults to 10000.
+        SNR (float, optional): pick a fixed SNR instead of random generation. Defaults to None.
         SNR_boundary_low (float, optional): lower boundary of SNR. Defaults to 50.
-        SNR_boundary_high (float, optional): upper boundary of SNR. Defaults to 800.
+        SNR_boundary_high (float, optional): upper boundary of SNR. Defaults to 500.
         echo_3 (float, optional): the 3rd echo time in ms. Defaults to 30.
         echo_last (float, optional): the last echo time in ms. Defaults to 320.
         echo_train_num (int, optional): the number of echoes in the echo train. Defaults to 32.
@@ -442,7 +445,8 @@ def produce_training_data(decay_lib,
         peak_width (float, optional): the variance of the gaussian peak. Defaults to 1.
         T2_min_universal (float, optional): the overall minimal T2 (ms) of the analysis. Defaults to calculate on the fly if None is given.
         T2_max_universal (float, optional): the overall maximal T2 (ms) of the analysis. Defaults to to 2000ms if None is given.
-        exclude_M_max (bool, optional): exclude the M_max if True. Defaults to False.
+        exclude_M_max (bool, optional): exclude the M_max if True. Defaults to True.
+        N_weights (float, optional): the weighting factor for N peaks (weight = N_choice ** N_weights).
 
     Returns:
         data: dictionary collection of the produced training data
@@ -472,12 +476,13 @@ def produce_training_data(decay_lib,
     for i in range(realizations):        
         ### Randomly determine the SNR, the minimum T2, the number of T2s (must < M), and the flip angle FA.
         #SNR = 100 ## for fixed SNR
-        SNR = np.random.randint(SNR_boundary_low, SNR_boundary_high)
+        if SNR == None:
+            SNR = np.random.randint(SNR_boundary_low, SNR_boundary_high)
         T2_min, _ = T2_boundary(SNR, echo_3, echo_last)
         T2_max = T2_max_universal
         M = np.floor(T2_components_resolution_finite_domain(SNR, T2_min, T2_max))
         N_choice = np.arange(1, M+1)
-        weight = N_choice**0.01 ## weighting factor for each choice
+        weight = N_choice ** N_weights ## weighting factor for each choice (may change in the future)
         num_T2 = int(np.random.choice(N_choice, p=weight/weight.sum()))
         FA = np.random.randint(FA_min, 180+1)
         ### Calculate the resolution limit
