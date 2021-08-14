@@ -425,7 +425,7 @@ def produce_training_data(decay_lib,
                           peak_width = 1,
                           T2_min_universal = None,
                           T2_max_universal = None,
-                          exclude_M_max = False):
+                          exclude_M_max = True):
     """
     Produce training data via SAME-ECOS simulation pipeline (use a single cpu core).
 
@@ -442,7 +442,7 @@ def produce_training_data(decay_lib,
         peak_width (float, optional): the variance of the gaussian peak. Defaults to 1.
         T2_min_universal (float, optional): the overall minimal T2 (ms) of the analysis. Defaults to calculate on the fly if None is given.
         T2_max_universal (float, optional): the overall maximal T2 (ms) of the analysis. Defaults to to 2000ms if None is given.
-        exclude_M_max (bool, optional): exclude the M_max if True. Defaults to False.
+        exclude_M_max (bool, optional): exclude the M_max if True. Defaults to True.
 
     Returns:
         data: dictionary collection of the produced training data
@@ -476,8 +476,11 @@ def produce_training_data(decay_lib,
         T2_min, _ = T2_boundary(SNR, echo_3, echo_last)
         T2_max = T2_max_universal
         M = np.floor(T2_components_resolution_finite_domain(SNR, T2_min, T2_max))
-        N_choice = np.arange(1, M+1)
-        weight = N_choice**0.01 ## weighting factor for each choice
+        if exclude_M_max == True:
+            N_choice = np.arange(1, M)
+        else:
+            N_choice = np.arange(1, M+1)
+        weight = N_choice**0.2 ## weighting factor for each choice
         num_T2 = int(np.random.choice(N_choice, p=weight/weight.sum()))
         FA = np.random.randint(FA_min, 180+1)
         ### Calculate the resolution limit
@@ -543,7 +546,7 @@ def mp_yield_training_data(func_produce_training_data,
                            peak_width=1,
                            T2_min_universal=None,
                            T2_max_universal=None,
-                           exclude_M_max=False):
+                           exclude_M_max=True):
     """
     Use multiple cpu cores to accelerate training data production using multiprocessing package.
 
@@ -562,7 +565,7 @@ def mp_yield_training_data(func_produce_training_data,
         peak_width (float, optional): the variance of the gaussian peak. Defaults to 1.
         T2_min_universal (float, optional): the overall minimal T2 (ms) of the analysis. Defaults to calculate on the fly if None is given.
         T2_max_universal (float, optional): the overall maximal T2 (ms) of the analysis. Defaults to to 2000ms if None is given.
-        exclude_M_max (bool, optional): exclude the M_max if True. Defaults to False.
+        exclude_M_max (bool, optional): exclude the M_max if True. Defaults to True.
 
     Returns:
         data_all: a data dictionary concatenated from all cpu cores
