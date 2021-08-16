@@ -34,5 +34,5 @@ The following packages need to be installed and imported properly:
 File *package-list.txt* contains the full list of all packages installed in this project environment.
 
 ## Resource and reference
-- Conventional analysis method non-negative least squares (NNLS) and EPG functions can be requested at this URL: https://mriresearch.med.ubc.ca/news-projects/myelin-water-fraction/
+- Conventional analysis method non-negative least squares (NNLS) and the extended phase graph (EPG) algorithm can be requested at this URL: https://mriresearch.med.ubc.ca/news-projects/myelin-water-fraction/
 - Please reference this paper: https://arxiv.org/abs/2009.06761 (to be updated)
