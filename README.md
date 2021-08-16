@@ -19,7 +19,7 @@ This Repository provides one specific example (32-echo spin echo sequence) as a 
 - *SAME_ECOS_functions.py* contains the source code that are required by the SAME-ECOS workflow. 
 - *example_usage.ipynb* contains the SAME-ECOS workflow. Change the variable default values accordingly based on experimental conditions (e.g. SNR range, T2 range, echo times, flip angle etc.)
 - *EPG_decay_library_32echo.mat* is a pre-computed library for the 32-echo spin echo decay sequence using extended phase graph (EPG) algorithm. Using a pre-computed EPG library is more efficient, compared with invoking the EPG functions at every simulation realization.
-- *NN_model_example.h5* is the trained model that takes 32-echo input data and output a T2 spectrum depicted by 40 basis t2s.
+- *NN_model_example.h5* is the trained model that takes 32-echo input data and outputs a T2 spectrum depicted by 40 basis t2s.
 
 Download this repo, lauch Jupyter Notebook server, and open *example_usage.ipynb*, then you can play with SAME-ECOS. In general, we recommend the users to use their own datasets to train their models adaptively instead of using the example trained model provided in this repository, although it might work as well.
 
