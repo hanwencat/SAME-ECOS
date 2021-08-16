@@ -14,7 +14,7 @@ The SAME-ECOS workflow takes 4 steps: **simulate, train, test, and deploy.**
 3. **Test** the trained model using customized tests (e.g. compare with baseline method) and adjust Step 1 & 2 until obtaining satisfactory test results 
 4. **Deploy** the trained model to experimental data and get T2 spectrum for each imaging voxel
 
-## What is in this Repository
+## What are the files in this repository
 This Repository provides one specific example (in-vivo 32-echo sequence) as a paradigm to demonstrate the usage of SAME-ECOS. The following files can be downloaded:
 - *SAME_ECOS_functions.py* contains all the functions that are required by the SAME-ECOS workflow. 
 - *example_usage.ipynb* contains the SAME-ECOS workflow. Change the variable default values accordingly based on experimental conditions (e.g. SNR range, T2 range, echo times, flip angle etc.)
