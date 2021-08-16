@@ -1,5 +1,5 @@
 # SAME-ECOS
-Spectrum analysis for multiple exponentials via experimental condition oriented simulation (https://arxiv.org/abs/2009.06761 to be updated)
+Spectrum analysis for multiple exponentials via experimental condition oriented simulation
 
 ## Introduction to SAME-ECOS
 - A data-driven analysis workflow for multi-echo relaxation data acquired in magnetic resonance experiments (e.g. myelin water imaging sequences).
@@ -15,13 +15,13 @@ The SAME-ECOS workflow takes 4 steps: **simulate, train, test, and deploy.**
 4. **Deploy** the trained model to experimental data and get T2 spectrum for each imaging voxel
 
 ## What are the files in this repository
-This Repository provides one specific example (in-vivo 32-echo sequence) as a paradigm to demonstrate the usage of SAME-ECOS. The following files can be downloaded:
-- *SAME_ECOS_functions.py* contains all the functions that are required by the SAME-ECOS workflow. 
+This Repository provides one specific example (32-echo spin echo sequence) as a paradigm to demonstrate the usage of SAME-ECOS. This repo contains the following files:
+- *SAME_ECOS_functions.py* contains the source code that are required by the SAME-ECOS workflow. 
 - *example_usage.ipynb* contains the SAME-ECOS workflow. Change the variable default values accordingly based on experimental conditions (e.g. SNR range, T2 range, echo times, flip angle etc.)
 - *EPG_decay_library_32echo.mat* is a pre-computed library for the 32-echo spin echo decay sequence using extended phase graph (EPG) algorithm. Using a pre-computed EPG library is more efficient, compared with invoking the EPG functions at every simulation realization.
 - *NN_model_example.h5* is the trained model that takes 32-echo input data and output a T2 spectrum depicted by 40 basis t2s.
 
-In general, we recommend the users to use their own datasets to train their models adaptively instead of using the example trained model provided in this repository, although it might work as well.
+Download this repo, lauch Jupyter Notebook server, and open *example_usage.ipynb*, then you can play with SAME-ECOS. In general, we recommend the users to use their own datasets to train their models adaptively instead of using the example trained model provided in this repository, although it might work as well.
 
 ## Package dependencies
 The following packages need to be installed and imported properly:
