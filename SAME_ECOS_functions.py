@@ -4,7 +4,7 @@ import math
 import itertools
 import matplotlib.pyplot as plt
 
-## Determine for boundary conditions
+
 def T2_boundary(SNR=100, echo_3=30, echo_last=320):
     """
     Generate T2 boundaries for SAME-ECOS analysis.
@@ -125,8 +125,6 @@ def analysis_boundary_condition(SNR=100, echo_1=10, T2_max=2000):
     return num_T2-1, np.ceil(T2_min_list)
 
 
-
-## Random generation for T2 peaks
 def T2_location_generator_v3(T2_min=5, T2_max=2000, num_T2=3, M_max=5, scale='log'):
     """
     Randomly generate T2 locations.
@@ -276,7 +274,6 @@ def metrics_extraction_v3(T2_location, T2_amplitude, MW_low_cutoff=0, MW_high_cu
     return MWF, MWGMT2, IEWF, IEWGMT2, GMT2
 
 
-## Produce decay data and spectral labels for model training
 def load_decay_lib(file_path):
     """
     Load the calculated decay library from .mat file.
