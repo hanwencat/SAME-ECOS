@@ -9,14 +9,14 @@ Spectrum analysis for multiple exponentials via experimental condition oriented 
 
 ## How does SAME-ECOS work
 The SAME-ECOS workflow takes 4 steps: **simulate, train, test, and deploy.**
-1. **Simulate** sufficient ground truth training examples of random T2 spectra and their MR signals (obeying the T2 resolution limit and experimental conditions)
-2. **Train** a neural network model to learn the mapping between the simulated decay signals and the ground truth spectra
-3. **Test** the trained model using customized tests (e.g. compare with baseline method) and adjust Step 1 & 2 until obtaining satisfactory test results 
-4. **Deploy** the trained model to experimental data and get T2 spectrum for each imaging voxel
+1. **Simulate** sufficient ground truth training examples of random T2 spectra and their MR signals (obeying the T2 resolution limit and experimental conditions).
+2. **Train** a neural network model to learn the mapping between the simulated decay signals and the ground truth spectra.
+3. **Test** the trained model using customized tests (e.g. compare with baseline method) and adjust Step 1 & 2 until obtaining satisfactory test results. 
+4. **Deploy** the trained model to experimental data and get T2 spectrum for each imaging voxel.
 
 ## What are the files in this repository
 This Repository provides one specific example (32-echo spin echo sequence) as a paradigm to demonstrate the usage of SAME-ECOS. This repo contains the following files:
-- *SAME_ECOS_functions.py* contains the source code that are required by the SAME-ECOS workflow. 
+- *SAME_ECOS_functions.py* contains the source code that is required by the SAME-ECOS workflow. 
 - *example_usage.ipynb* contains the SAME-ECOS workflow. Change the variable default values accordingly based on experimental conditions (e.g. SNR range, T2 range, echo times, flip angle etc.)
 - *EPG_decay_library_32echo.mat* is a pre-computed library for the 32-echo spin echo decay sequence using extended phase graph (EPG) algorithm. Using a pre-computed EPG library is more efficient, compared with invoking the EPG functions at every simulation realization.
 - *NN_model_example.h5* is the trained model that takes 32-echo input data and outputs a T2 spectrum depicted by 40 basis t2s.
