@@ -35,4 +35,4 @@ File *package-list.txt* contains the full list of all packages installed in this
 
 ## Resource and reference
 - Conventional analysis method non-negative least squares (NNLS) and the extended phase graph (EPG) algorithm can be requested at this URL: https://mriresearch.med.ubc.ca/news-projects/myelin-water-fraction/
-- Please reference this paper: https://arxiv.org/abs/2009.06761 (to be updated)
+- Please reference this paper: http://doi.org/10.1002/mrm.29000
