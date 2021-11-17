@@ -5,6 +5,5 @@ mGRE_T2star.nii
 Apply_in-vivo.ipynb
 CC_mask.nii.gz
 NLLS_mwf.mat
-NN_3_pool_model_example.h5
 WT_F_21_mGRE_T2star_CC_mask_manual.nii.gz
 mGRE_T2star_bet_mask.nii.gz
